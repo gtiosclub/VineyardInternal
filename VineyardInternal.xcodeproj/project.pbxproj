@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B7C253BE2C9247EA00A8F890 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B7C253BD2C9247EA00A8F890 /* GoogleService-Info.plist */; };
 		BB3465D72C92400C00EE9D9D /* VineyardInternalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3465D62C92400C00EE9D9D /* VineyardInternalApp.swift */; };
 		BB3465D92C92400C00EE9D9D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3465D82C92400C00EE9D9D /* ContentView.swift */; };
 		BB3465DB2C92400F00EE9D9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB3465DA2C92400F00EE9D9D /* Assets.xcassets */; };
@@ -14,6 +15,11 @@
 		BB3465E82C92401000EE9D9D /* VineyardInternalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3465E72C92401000EE9D9D /* VineyardInternalTests.swift */; };
 		BB3465F22C92401000EE9D9D /* VineyardInternalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3465F12C92401000EE9D9D /* VineyardInternalUITests.swift */; };
 		BB3465F42C92401000EE9D9D /* VineyardInternalUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3465F32C92401000EE9D9D /* VineyardInternalUITestsLaunchTests.swift */; };
+		BB3466022C92431100EE9D9D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = BB3466012C92431100EE9D9D /* FirebaseAnalytics */; };
+		BB3466042C92431100EE9D9D /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = BB3466032C92431100EE9D9D /* FirebaseAnalyticsOnDeviceConversion */; };
+		BB3466062C92431100EE9D9D /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = BB3466052C92431100EE9D9D /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		BB3466082C92431100EE9D9D /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = BB3466072C92431100EE9D9D /* FirebaseAppCheck */; };
+		BB34660A2C92431100EE9D9D /* FirebaseAppDistribution-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = BB3466092C92431100EE9D9D /* FirebaseAppDistribution-Beta */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B7C253BD2C9247EA00A8F890 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BB3465D32C92400C00EE9D9D /* VineyardInternal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VineyardInternal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB3465D62C92400C00EE9D9D /* VineyardInternalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineyardInternalApp.swift; sourceTree = "<group>"; };
 		BB3465D82C92400C00EE9D9D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -51,6 +58,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB3466082C92431100EE9D9D /* FirebaseAppCheck in Frameworks */,
+				BB3466022C92431100EE9D9D /* FirebaseAnalytics in Frameworks */,
+				BB34660A2C92431100EE9D9D /* FirebaseAppDistribution-Beta in Frameworks */,
+				BB3466062C92431100EE9D9D /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				BB3466042C92431100EE9D9D /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +106,7 @@
 		BB3465D52C92400C00EE9D9D /* VineyardInternal */ = {
 			isa = PBXGroup;
 			children = (
+				B7C253BD2C9247EA00A8F890 /* GoogleService-Info.plist */,
 				BB3465D62C92400C00EE9D9D /* VineyardInternalApp.swift */,
 				BB3465D82C92400C00EE9D9D /* ContentView.swift */,
 				BB3465DA2C92400F00EE9D9D /* Assets.xcassets */,
@@ -143,6 +156,13 @@
 			dependencies = (
 			);
 			name = VineyardInternal;
+			packageProductDependencies = (
+				BB3466012C92431100EE9D9D /* FirebaseAnalytics */,
+				BB3466032C92431100EE9D9D /* FirebaseAnalyticsOnDeviceConversion */,
+				BB3466052C92431100EE9D9D /* FirebaseAnalyticsWithoutAdIdSupport */,
+				BB3466072C92431100EE9D9D /* FirebaseAppCheck */,
+				BB3466092C92431100EE9D9D /* FirebaseAppDistribution-Beta */,
+			);
 			productName = VineyardInternal;
 			productReference = BB3465D32C92400C00EE9D9D /* VineyardInternal.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +235,9 @@
 				Base,
 			);
 			mainGroup = BB3465CA2C92400C00EE9D9D;
+			packageReferences = (
+				BB3466002C92431100EE9D9D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = BB3465D42C92400C00EE9D9D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -233,6 +256,7 @@
 			files = (
 				BB3465DE2C92400F00EE9D9D /* Preview Assets.xcassets in Resources */,
 				BB3465DB2C92400F00EE9D9D /* Assets.xcassets in Resources */,
+				B7C253BE2C9247EA00A8F890 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,6 +454,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -459,6 +484,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -588,6 +614,45 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BB3466002C92431100EE9D9D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BB3466012C92431100EE9D9D /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB3466002C92431100EE9D9D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		BB3466032C92431100EE9D9D /* FirebaseAnalyticsOnDeviceConversion */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB3466002C92431100EE9D9D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsOnDeviceConversion;
+		};
+		BB3466052C92431100EE9D9D /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB3466002C92431100EE9D9D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		BB3466072C92431100EE9D9D /* FirebaseAppCheck */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB3466002C92431100EE9D9D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAppCheck;
+		};
+		BB3466092C92431100EE9D9D /* FirebaseAppDistribution-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB3466002C92431100EE9D9D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseAppDistribution-Beta";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BB3465CB2C92400C00EE9D9D /* Project object */;
 }
