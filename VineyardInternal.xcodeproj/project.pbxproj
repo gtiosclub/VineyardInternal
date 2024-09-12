@@ -20,6 +20,9 @@
 		BB3466062C92431100EE9D9D /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = BB3466052C92431100EE9D9D /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		BB3466082C92431100EE9D9D /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = BB3466072C92431100EE9D9D /* FirebaseAppCheck */; };
 		BB34660A2C92431100EE9D9D /* FirebaseAppDistribution-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = BB3466092C92431100EE9D9D /* FirebaseAppDistribution-Beta */; };
+		DA7754A42C937A7800ADD4EC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7754A32C937A7800ADD4EC /* LoginView.swift */; };
+		DA7754A62C937D1C00ADD4EC /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = DA7754A52C937D1C00ADD4EC /* FirebaseAuth */; };
+		DA7754A82C9381B000ADD4EC /* LoggedInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7754A72C9381B000ADD4EC /* LoggedInView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,8 @@
 		BB3465ED2C92401000EE9D9D /* VineyardInternalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VineyardInternalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB3465F12C92401000EE9D9D /* VineyardInternalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineyardInternalUITests.swift; sourceTree = "<group>"; };
 		BB3465F32C92401000EE9D9D /* VineyardInternalUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineyardInternalUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		DA7754A32C937A7800ADD4EC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		DA7754A72C9381B000ADD4EC /* LoggedInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +64,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB3466082C92431100EE9D9D /* FirebaseAppCheck in Frameworks */,
+				DA7754A62C937D1C00ADD4EC /* FirebaseAuth in Frameworks */,
 				BB3466022C92431100EE9D9D /* FirebaseAnalytics in Frameworks */,
 				BB34660A2C92431100EE9D9D /* FirebaseAppDistribution-Beta in Frameworks */,
 				BB3466062C92431100EE9D9D /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
@@ -107,6 +113,8 @@
 			isa = PBXGroup;
 			children = (
 				B7C253BD2C9247EA00A8F890 /* GoogleService-Info.plist */,
+				DA7754A32C937A7800ADD4EC /* LoginView.swift */,
+				DA7754A72C9381B000ADD4EC /* LoggedInView.swift */,
 				BB3465D62C92400C00EE9D9D /* VineyardInternalApp.swift */,
 				BB3465D82C92400C00EE9D9D /* ContentView.swift */,
 				BB3465DA2C92400F00EE9D9D /* Assets.xcassets */,
@@ -162,6 +170,7 @@
 				BB3466052C92431100EE9D9D /* FirebaseAnalyticsWithoutAdIdSupport */,
 				BB3466072C92431100EE9D9D /* FirebaseAppCheck */,
 				BB3466092C92431100EE9D9D /* FirebaseAppDistribution-Beta */,
+				DA7754A52C937D1C00ADD4EC /* FirebaseAuth */,
 			);
 			productName = VineyardInternal;
 			productReference = BB3465D32C92400C00EE9D9D /* VineyardInternal.app */;
@@ -281,6 +290,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA7754A42C937A7800ADD4EC /* LoginView.swift in Sources */,
+				DA7754A82C9381B000ADD4EC /* LoggedInView.swift in Sources */,
 				BB3465D92C92400C00EE9D9D /* ContentView.swift in Sources */,
 				BB3465D72C92400C00EE9D9D /* VineyardInternalApp.swift in Sources */,
 			);
@@ -651,6 +662,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BB3466002C92431100EE9D9D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseAppDistribution-Beta";
+		};
+		DA7754A52C937D1C00ADD4EC /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB3466002C92431100EE9D9D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
