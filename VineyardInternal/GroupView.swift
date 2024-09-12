@@ -28,8 +28,19 @@ struct GroupView: View {
                             .foregroundColor(.primary)
                     }
                     Spacer()
-                    Button("Add Group") {
-                        viewModel.addGroup()
+                    VStack{
+                        Button("Add Group") {
+                            viewModel.addGroup()
+                        }
+                        .padding(1)
+                        Button("Fetch Group") {
+                            viewModel.fetchGroupFromFirestore(groupID: "F3827ED2-5E70-47AC-BCB1-FEBDF79AF494")
+                        }
+                        .padding(1)
+                        Button("Clear All") {
+                            viewModel.clearAll()
+                        }
+                        
                     }
                     
                 }
@@ -132,9 +143,6 @@ struct GroupView: View {
         }
     }
 }
-
-
-
 
 extension TimeBound {
     func description() -> String {

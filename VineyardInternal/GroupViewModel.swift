@@ -24,6 +24,13 @@ class GroupViewModel: ObservableObject {
     @Published var resolutions: [Resolution] = []
     
     var group: Group? = nil
+    
+    func clearAll() {
+        groupTitle = "Group Name"
+        yearlyResolutionName = "Yearly Resolution"
+        people = []
+        resolutions = []
+    }
 
     func addPerson() {
         if !curr_name.isEmpty && !curr_age.isEmpty {
@@ -154,4 +161,94 @@ class GroupViewModel: ObservableObject {
             }
         }
     }
+    
+    func fetchGroupFromFirestore(groupID: String) {
+        let docRef = db.collection("groups").document(groupID)
+        Task {
+            do {
+                let document = try await docRef.getDocument()
+                if document.exists {
+                    let data = document.data() ?? [:]
+                    
+                    if let title = data["title"] as? String {
+                        self.groupTitle = title
+                    }
+                    
+                    if let peopleIDs = data["people"] as? [String] {
+                        // Fetch people using their IDs
+                        await fetchPeopleFromFirestore(peopleIDs: peopleIDs)
+                    }
+                    
+                    if let yearlyResolutionData = data["yearlyResolution"] as? [String: Any],
+                       let yearlyResolutionName = yearlyResolutionData["name"] as? String,
+                       let resolutionIDs = yearlyResolutionData["resolutions"] as? [String] {
+                        
+                        self.yearlyResolutionName = yearlyResolutionName
+                        await fetchResolutionsFromFirestore(resolutionIDs: resolutionIDs)
+                    }
+                    
+                } else {
+                    print("Document does not exist")
+                }
+            } catch {
+                print("Error getting document: \(error)")
+            }
+        }
+    }
+
+    
+    func fetchPeopleFromFirestore(peopleIDs: [String]) {
+        self.people = []
+        Task {
+            for personID in peopleIDs {
+                let docRef = db.collection("people").document(personID)
+                do {
+                    let document = try await docRef.getDocument()
+                    if document.exists {
+                        if let data = document.data() {
+                            let id = data["id"] as? String ?? ""
+                            let name = data["name"] as? String ?? "Unknown"
+                            let age = data["age"] as? Int ?? 0
+                            
+                            let person = Person(id: id, name: name, age: age)
+                            self.people.append(person)
+                        }
+                    } else {
+                        print("Document does not exist")
+                    }
+                } catch {
+                    print("Error getting document: \(error)")
+                }
+            }
+        }
+    }
+    
+    func fetchResolutionsFromFirestore(resolutionIDs: [String]) {
+        self.resolutions = []
+        Task {
+            for resolutionID in resolutionIDs {
+                let docRef = db.collection("resolutions").document(resolutionID)
+                do {
+                    let document = try await docRef.getDocument()
+                    if document.exists {
+                        if let data = document.data() {
+                            let id = data["id"] as? String ?? ""
+                            let name = data["name"] as? String ?? "Unknown Resolution"
+                            let timeBoundRaw = data["timeBound"] as? String ?? "day"
+                            let timeBound = TimeBound(rawValue: timeBoundRaw) ?? .day
+                            let freq = data["freq"] as? Int ?? 0
+                            
+                            let resolution = Resolution(timeBound: timeBound, name: name, successCheckoff: .incomplete, progress: 0.0, goal: 100.0, freq: freq)
+                            self.resolutions.append(resolution)
+                        }
+                    } else {
+                        print("Resolution document does not exist")
+                    }
+                } catch {
+                    print("Error getting resolution document: \(error)")
+                }
+            }
+        }
+    }
+
 }

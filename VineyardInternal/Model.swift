@@ -19,11 +19,12 @@ enum SuccessCheckoff: String{
 }
 
 class Person: Identifiable {
-    var id = UUID().uuidString
+    var id: String
     var name: String
     var age: Int
 
-    init(name: String, age: Int) {
+    init(id: String = UUID().uuidString, name: String, age: Int) {
+        self.id = id
         self.name = name
         self.age = age
     }
