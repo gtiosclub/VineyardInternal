@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8730B9312C92A9270040322B /* GroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8730B9302C92A9270040322B /* GroupView.swift */; };
+		8730B9332C92A9430040322B /* GroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8730B9322C92A9430040322B /* GroupViewModel.swift */; };
+		8730B9352C92A95C0040322B /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8730B9342C92A95C0040322B /* Model.swift */; };
+		8730B9372C92A9950040322B /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 8730B9362C92A9950040322B /* FirebaseAuth */; };
+		8730B9392C92A9950040322B /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 8730B9382C92A9950040322B /* FirebaseFirestore */; };
 		B7C253BE2C9247EA00A8F890 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B7C253BD2C9247EA00A8F890 /* GoogleService-Info.plist */; };
 		BB3465D72C92400C00EE9D9D /* VineyardInternalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3465D62C92400C00EE9D9D /* VineyardInternalApp.swift */; };
 		BB3465D92C92400C00EE9D9D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3465D82C92400C00EE9D9D /* ContentView.swift */; };
@@ -40,6 +45,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8730B9302C92A9270040322B /* GroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupView.swift; sourceTree = "<group>"; };
+		8730B9322C92A9430040322B /* GroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewModel.swift; sourceTree = "<group>"; };
+		8730B9342C92A95C0040322B /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		B7C253BD2C9247EA00A8F890 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BB3465D32C92400C00EE9D9D /* VineyardInternal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VineyardInternal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB3465D62C92400C00EE9D9D /* VineyardInternalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineyardInternalApp.swift; sourceTree = "<group>"; };
@@ -59,10 +67,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB3466082C92431100EE9D9D /* FirebaseAppCheck in Frameworks */,
+				8730B9372C92A9950040322B /* FirebaseAuth in Frameworks */,
 				BB3466022C92431100EE9D9D /* FirebaseAnalytics in Frameworks */,
 				BB34660A2C92431100EE9D9D /* FirebaseAppDistribution-Beta in Frameworks */,
 				BB3466062C92431100EE9D9D /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				BB3466042C92431100EE9D9D /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
+				8730B9392C92A9950040322B /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +119,9 @@
 				B7C253BD2C9247EA00A8F890 /* GoogleService-Info.plist */,
 				BB3465D62C92400C00EE9D9D /* VineyardInternalApp.swift */,
 				BB3465D82C92400C00EE9D9D /* ContentView.swift */,
+				8730B9322C92A9430040322B /* GroupViewModel.swift */,
+				8730B9342C92A95C0040322B /* Model.swift */,
+				8730B9302C92A9270040322B /* GroupView.swift */,
 				BB3465DA2C92400F00EE9D9D /* Assets.xcassets */,
 				BB3465DC2C92400F00EE9D9D /* Preview Content */,
 			);
@@ -162,6 +175,8 @@
 				BB3466052C92431100EE9D9D /* FirebaseAnalyticsWithoutAdIdSupport */,
 				BB3466072C92431100EE9D9D /* FirebaseAppCheck */,
 				BB3466092C92431100EE9D9D /* FirebaseAppDistribution-Beta */,
+				8730B9362C92A9950040322B /* FirebaseAuth */,
+				8730B9382C92A9950040322B /* FirebaseFirestore */,
 			);
 			productName = VineyardInternal;
 			productReference = BB3465D32C92400C00EE9D9D /* VineyardInternal.app */;
@@ -281,8 +296,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8730B9352C92A95C0040322B /* Model.swift in Sources */,
+				8730B9332C92A9430040322B /* GroupViewModel.swift in Sources */,
 				BB3465D92C92400C00EE9D9D /* ContentView.swift in Sources */,
 				BB3465D72C92400C00EE9D9D /* VineyardInternalApp.swift in Sources */,
+				8730B9312C92A9270040322B /* GroupView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -627,6 +645,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		8730B9362C92A9950040322B /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB3466002C92431100EE9D9D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		8730B9382C92A9950040322B /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB3466002C92431100EE9D9D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
 		BB3466012C92431100EE9D9D /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = BB3466002C92431100EE9D9D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
