@@ -13,7 +13,7 @@ class Group: Identifiable {
     var people: [Person]
     var yearlyResolution: YearlyResolution
 
-    init(people: [Person], yearlyResolution: YearlyResolution, title: String) {
+    init(people: [Person] = [], yearlyResolution: YearlyResolution = .init(name: "Yearly Resolution", resolutions: []), title: String = "Group Name") {
         self.people = people
         self.yearlyResolution = yearlyResolution
         self.title = title

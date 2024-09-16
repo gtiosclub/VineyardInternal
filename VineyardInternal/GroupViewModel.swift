@@ -11,33 +11,27 @@ import FirebaseFirestore
 class GroupViewModel: ObservableObject {
     
     // Local Stuff
-    @Published var groupTitle: String = "Group Name"
-    @Published var yearlyResolutionName: String = "Yearly Resolution"
-    
     @Published var curr_name: String = ""
     @Published var curr_age: String = ""
-    @Published var people: [Person] = []
 
     @Published var curr_timeBound: TimeBound? = .day
     @Published var curr_resolution_name: String = ""
     @Published var curr_freq: String = ""
-    @Published var resolutions: [Resolution] = []
+    
+    @Published var group: Group = .init()
+    
     
     private let databaseService: DatabaseServiceProtocol = FirebaseDataManager()
-    var group: Group? = nil
     
     func clearAll() {
-        groupTitle = "Group Name"
-        yearlyResolutionName = "Yearly Resolution"
-        people = []
-        resolutions = []
+        self.group = .init()
     }
 
     func addPerson() {
         if !curr_name.isEmpty && !curr_age.isEmpty {
         if let age = Int(curr_age) {
             let person = Person(name: self.curr_name, age: age)
-            people.append(person)
+            group.people.append(person)
             //print("Button pressed - Adding person with name: \(curr_name) and age: \(age)")
             self.curr_name = ""
             self.curr_age = ""
@@ -47,13 +41,13 @@ class GroupViewModel: ObservableObject {
       } else {
         print("Please enter a name and age.")
       }
-        print("People: \(people)")
+        print("People: \(group.people)")
     }
     
     func addResolution() {
         if let timeBound = self.curr_timeBound, let freq = Int(curr_freq), !self.curr_resolution_name.isEmpty {
             let resolution = Resolution(timeBound: timeBound, name: self.curr_resolution_name, successCheckoff: .incomplete, progress: 0.0, goal: 100.0, freq: freq)
-            self.resolutions.append(resolution)
+            self.group.yearlyResolution.resolutions.append(resolution)
             //print("Added resolution: \(resolution)")
             self.curr_resolution_name = ""
             self.curr_timeBound = .day
@@ -61,58 +55,83 @@ class GroupViewModel: ObservableObject {
         } else {
             print("Failed to add resolution: Missing or invalid information.")
         }
-        print("Resolutions: \(resolutions)")
+        print("Resolutions: \(group.yearlyResolution.resolutions)")
     }
 
     @MainActor
-    func addGroup() async throws {
-        for person in people {
-            try await addPersonToFirestore(person: person)
+    func addGroup() async {
+        for person in group.people {
+            await addPersonToFirestore(person: person)
         }
         
-        for resolution in resolutions {
-            try await addResolutionToFirestore(resolution: resolution)
+        for resolution in group.yearlyResolution.resolutions {
+            await addResolutionToFirestore(resolution: resolution)
         }
 
-        self.group = Group(people: self.people, yearlyResolution: YearlyResolution(name: yearlyResolutionName, resolutions: self.resolutions), title: groupTitle)
-        
-        if let group = self.group {
-            try await addGroupToFirestore(group: group)
+        await addGroupToFirestore(group: group)
+    }
+    
+    @MainActor
+    func addPersonToFirestore(person: Person) async {
+        do {
+            try await databaseService.addPersonToDB(person: person)
         }
+        catch {
+           print("Error adding person:  \(error)")
+       }
     }
     
     @MainActor
-    func addPersonToFirestore(person: Person) async throws{
-        try await databaseService.addPersonToDB(person: person)
+    func addResolutionToFirestore(resolution: Resolution) async {
+        do {
+            try await databaseService.addResolutionToDB(resolution: resolution)
+        }
+        catch {
+           print("Error adding person:  \(error)")
+       }
     }
     
     @MainActor
-    func addResolutionToFirestore(resolution: Resolution) async throws{
-        try await databaseService.addResolutionToDB(resolution: resolution)
+    func addGroupToFirestore(group: Group) async {
+        do {
+            try await databaseService.addGroupToDB(group: group)
+        }
+        catch {
+           print("Error adding group:  \(error)")
+       }
     }
     
-    @MainActor
-    func addGroupToFirestore(group: Group) async throws{
-        try await databaseService.addGroupToDB(group: group)
-    }
     
     
     @MainActor
-    func fetchGroupFromFirestore(groupID: String) async throws{
-        let group = try await databaseService.fetchGroupFromDB(groupID: groupID)
-        self.groupTitle = group!.title
-        self.people = group!.people
-        self.yearlyResolutionName = group!.yearlyResolution.name
+    func fetchGroupFromFirestore(groupID: String) async {
+        do {
+            if let group = try await databaseService.fetchGroupFromDB(groupID: groupID) {
+                self.group = group
+            }
+        }
+        catch {
+           print("Error fetching group:  \(error)")
+       }
     }
 
     @MainActor
-    func fetchPeopleFromFirestore(peopleIDs: [String]) async throws {
-        self.people = try await databaseService.fetchPeopleFromDB(peopleIDs: peopleIDs)
+    func fetchPeopleFromFirestore(peopleIDs: [String]) async {
+        do {
+            self.group.people = try await databaseService.fetchPeopleFromDB(peopleIDs: peopleIDs)
+        }
+        catch {
+           print("Error fetching people:  \(error)")
+       }
     }
     
     @MainActor
-    func fetchResolutionsFromFirestore(resolutionIDs: [String]) async throws{
-        self.resolutions = try await databaseService.fetchResolutionsFromDB(resolutionIDs: resolutionIDs)
+    func fetchResolutionsFromFirestore(resolutionIDs: [String]) async {
+        do {
+            self.group.yearlyResolution.resolutions = try await databaseService.fetchResolutionsFromDB(resolutionIDs: resolutionIDs)
+        }
+        catch {
+           print("Error fetching resolutions:  \(error)")
+       }
     }
-
 }

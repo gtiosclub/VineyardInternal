@@ -16,7 +16,7 @@ struct GroupView: View {
         NavigationView {
             VStack(alignment: .leading) {
                 HStack {
-                    Text(viewModel.groupTitle)
+                    Text(viewModel.group.title)
                         .font(.largeTitle)
                         .bold()
 
@@ -31,13 +31,13 @@ struct GroupView: View {
                     VStack{
                         Button("Add Group") {
                             Task {
-                                try await viewModel.addGroup()
+                                await viewModel.addGroup()
                             }
                         }
                         .padding(1)
                         Button("Fetch Group") {
                             Task {
-                                try await viewModel.fetchGroupFromFirestore(groupID: "F3827ED2-5E70-47AC-BCB1-FEBDF79AF494")
+                                await viewModel.fetchGroupFromFirestore(groupID: "F3827ED2-5E70-47AC-BCB1-FEBDF79AF494")
                             }
                         }
                         .padding(1)
@@ -51,14 +51,14 @@ struct GroupView: View {
                 .padding([.top, .leading, .trailing])
 
 
-                Text(viewModel.yearlyResolutionName)
+                Text(viewModel.group.yearlyResolution.name)
                     .font(.title3)
                     .foregroundColor(.secondary)
                     .padding([.leading, .bottom, .trailing])
                 
                 List {
                     Section(header: Text("People")) {
-                        ForEach(viewModel.people) { person in
+                        ForEach(viewModel.group.people) { person in
                             HStack {
                                 Spacer()
                                 Text("\(person.name)")
@@ -73,7 +73,7 @@ struct GroupView: View {
                     }
 
                     Section(header: Text("Resolutions")) {
-                        ForEach(viewModel.resolutions) { resolution in
+                        ForEach(viewModel.group.yearlyResolution.resolutions) { resolution in
                             Text("\(resolution.name) - \(resolution.freq) times per \(resolution.timeBound.rawValue)")
                         }
                     }
@@ -93,7 +93,8 @@ struct GroupView: View {
                     }
                     Spacer()
                 }
-
+                // All of these bound variables should not be linked to viewModel. They should instead be state variables of the view which are
+                // passed into the viewmodel when the buttons are pressed.
                 Form {
                     Section(header: Text("Add New Person")) {
                         TextField("Name", text: $viewModel.curr_name)
@@ -118,12 +119,12 @@ struct GroupView: View {
             VStack {
                 Form {
                     Section(header: Text("Edit Group Title")) {
-                        TextField("Group Title", text: $viewModel.groupTitle)
+                        TextField("Group Title", text: $viewModel.group.title)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                     }
 
                     Section(header: Text("Edit Yearly Resolution Name")) {
-                        TextField("Yearly Resolution Name", text: $viewModel.yearlyResolutionName)
+                        TextField("Yearly Resolution Name", text: $viewModel.group.yearlyResolution.name)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                     }
                 }

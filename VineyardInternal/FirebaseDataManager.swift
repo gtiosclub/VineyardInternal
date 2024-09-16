@@ -140,13 +140,7 @@ class FirebaseDataManager: DatabaseServiceProtocol {
         let groupData = group.toDictionary()
         //print("Attempting to add group to Firestore with data: \(groupData)")
 
-        db.collection("groups").document(group.id).setData(groupData) { error in
-            if let error = error {
-                print("Error adding group to Firestore: \(error.localizedDescription)")
-            } else {
-                print("Group successfully added to Firestore!")
-            }
-        }
+        try await db.collection("groups").document(group.id).setData(groupData)
     }
     
     // Implementations for database functions to modify entries
