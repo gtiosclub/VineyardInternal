@@ -11,6 +11,25 @@ import SwiftUI
 struct GroupView: View {
     @StateObject var viewModel = GroupViewModel()
     @State private var showEditPopup: Bool = false
+    @State var curr_name: String = ""
+    @State var curr_age: String = ""
+    @State var curr_timeBound: TimeBound = .day
+    @State var curr_resolution_name: String = ""
+    @State var curr_freq: String = ""
+    var canAddPerson: Bool {
+        if !curr_name.isEmpty, let age = Int(curr_age), age > 0 {
+            return true
+        } else {
+            return false
+        }
+    }
+    var canAddResolution: Bool {
+        if !curr_resolution_name.isEmpty, let freq = Int(curr_freq), freq > 0 {
+            return true
+        } else {
+            return false
+        }
+    }
 
     var body: some View {
         NavigationView {
@@ -84,32 +103,40 @@ struct GroupView: View {
                 HStack {
                     Spacer()
                     Button("Add Person") {
-                        viewModel.addPerson()
+                        viewModel.addPerson(curr_name: curr_name, curr_age: curr_age)
+                        curr_name = ""
+                        curr_age = ""
                     }
+                    .disabled(!canAddPerson)
                     .padding()
 
                     Button("Add Resolution") {
-                        viewModel.addResolution()
+                        viewModel.addResolution(curr_timeBound: curr_timeBound, curr_resolution_name: curr_resolution_name, curr_freq: curr_freq)
+                        curr_resolution_name = ""
+                        curr_timeBound = .day
+                        curr_freq = ""
                     }
+                    .disabled(!canAddResolution)
                     Spacer()
                 }
                 // All of these bound variables should not be linked to viewModel. They should instead be state variables of the view which are
                 // passed into the viewmodel when the buttons are pressed.
                 Form {
                     Section(header: Text("Add New Person")) {
-                        TextField("Name", text: $viewModel.curr_name)
-                        TextField("Age", text: $viewModel.curr_age)
+                        TextField("Name", text: $curr_name)
+                        TextField("Age", text: $curr_age)
                             .keyboardType(.numberPad)
                     }
 
                     Section(header: Text("Add New Resolution")) {
-                        TextField("Resolution Name", text: $viewModel.curr_resolution_name)
-                        Picker("Time Bound", selection: $viewModel.curr_timeBound) {
+                        TextField("Resolution Name", text: $curr_resolution_name)
+                        Picker("Time Bound", selection: $curr_timeBound) {
                             ForEach(TimeBound.allCases, id: \.self) { bound in
                                 Text(bound.description()).tag(bound as TimeBound?)
                             }
                         }
-                        TextField("Frequency", text: $viewModel.curr_freq)
+                        TextField("Frequency", text: $curr_freq)
+                            .keyboardType(.numberPad)
                     }
                 }
                 .scrollDisabled(false)
@@ -145,19 +172,6 @@ struct GroupView: View {
             }
             .padding()
             .presentationDetents([.medium])
-        }
-    }
-}
-
-extension TimeBound {
-    func description() -> String {
-        switch self {
-        case .day:
-            return "Daily"
-        case .week:
-            return "Weekly"
-        case .month:
-            return "Monthly"
         }
     }
 }

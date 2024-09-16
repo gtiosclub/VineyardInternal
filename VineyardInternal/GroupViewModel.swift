@@ -11,13 +11,6 @@ import FirebaseFirestore
 class GroupViewModel: ObservableObject {
     
     // Local Stuff
-    @Published var curr_name: String = ""
-    @Published var curr_age: String = ""
-
-    @Published var curr_timeBound: TimeBound? = .day
-    @Published var curr_resolution_name: String = ""
-    @Published var curr_freq: String = ""
-    
     @Published var group: Group = .init()
     
     
@@ -27,14 +20,11 @@ class GroupViewModel: ObservableObject {
         self.group = .init()
     }
 
-    func addPerson() {
+    func addPerson(curr_name: String, curr_age: String) {
         if !curr_name.isEmpty && !curr_age.isEmpty {
         if let age = Int(curr_age) {
-            let person = Person(name: self.curr_name, age: age)
+            let person = Person(name: curr_name, age: age)
             group.people.append(person)
-            //print("Button pressed - Adding person with name: \(curr_name) and age: \(age)")
-            self.curr_name = ""
-            self.curr_age = ""
         } else {
           print("Invalid age format.")
         }
@@ -44,14 +34,11 @@ class GroupViewModel: ObservableObject {
         print("People: \(group.people)")
     }
     
-    func addResolution() {
-        if let timeBound = self.curr_timeBound, let freq = Int(curr_freq), !self.curr_resolution_name.isEmpty {
-            let resolution = Resolution(timeBound: timeBound, name: self.curr_resolution_name, successCheckoff: .incomplete, progress: 0.0, goal: 100.0, freq: freq)
+    func addResolution(curr_timeBound: TimeBound?, curr_resolution_name: String, curr_freq: String) {
+        if let timeBound = curr_timeBound, let freq = Int(curr_freq), !curr_resolution_name.isEmpty {
+            let resolution = Resolution(timeBound: timeBound, name: curr_resolution_name, successCheckoff: .incomplete, progress: 0.0, goal: 100.0, freq: freq)
             self.group.yearlyResolution.resolutions.append(resolution)
             //print("Added resolution: \(resolution)")
-            self.curr_resolution_name = ""
-            self.curr_timeBound = .day
-            self.curr_freq = ""
         } else {
             print("Failed to add resolution: Missing or invalid information.")
         }
