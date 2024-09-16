@@ -18,4 +18,14 @@ class Group: Identifiable {
         self.yearlyResolution = yearlyResolution
         self.title = title
     }
+    
+    func toDictionary() -> [String: Any] {
+        let peopleIDs = self.people.map { $0.id } // This creates an array of peopleIDs
+        let yearlyResolutionDict = self.yearlyResolution.toDictionary()
+        return [
+            "id": self.id,
+            "people": peopleIDs,
+            "yearlyResolution": yearlyResolutionDict
+        ]
+    }
 }

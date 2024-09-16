@@ -23,6 +23,7 @@ class GroupViewModel: ObservableObject {
     @Published var curr_freq: String = ""
     @Published var resolutions: [Resolution] = []
     
+    private let databaseService: DatabaseServiceProtocol = FirebaseDataManager()
     var group: Group? = nil
     
     func clearAll() {
@@ -48,7 +49,7 @@ class GroupViewModel: ObservableObject {
       }
         print("People: \(people)")
     }
-
+    
     func addResolution() {
         if let timeBound = self.curr_timeBound, let freq = Int(curr_freq), !self.curr_resolution_name.isEmpty {
             let resolution = Resolution(timeBound: timeBound, name: self.curr_resolution_name, successCheckoff: .incomplete, progress: 0.0, goal: 100.0, freq: freq)
@@ -63,192 +64,55 @@ class GroupViewModel: ObservableObject {
         print("Resolutions: \(resolutions)")
     }
 
-    func addGroup() {
+    @MainActor
+    func addGroup() async throws {
         for person in people {
-            addPersonToFirestore(person: person)
+            try await addPersonToFirestore(person: person)
         }
         
         for resolution in resolutions {
-            addResolutionToFirestore(resolution: resolution)
+            try await addResolutionToFirestore(resolution: resolution)
         }
 
         self.group = Group(people: self.people, yearlyResolution: YearlyResolution(name: yearlyResolutionName, resolutions: self.resolutions), title: groupTitle)
         
         if let group = self.group {
-            addGroupToFirestore(group: group)
+            try await addGroupToFirestore(group: group)
         }
     }
     
-    
-    // Conversion stuff
-    func personToDictionary(person: Person) -> [String: Any] {
-        return [
-            "id": person.id,
-            "name": person.name,
-            "age": person.age
-        ]
+    @MainActor
+    func addPersonToFirestore(person: Person) async throws{
+        try await databaseService.addPersonToDB(person: person)
     }
     
-    func resolutionToDictionary(resolution: Resolution) -> [String: Any] {
-        return [
-            "id": resolution.id,
-            "name": resolution.name,
-            "timeBound": resolution.timeBound.rawValue,
-            "successCheckoff": resolution.successCheckoff.rawValue,
-            "progress": resolution.progress,
-            "goal": resolution.goal,
-            "freq": resolution.freq
-        ]
+    @MainActor
+    func addResolutionToFirestore(resolution: Resolution) async throws{
+        try await databaseService.addResolutionToDB(resolution: resolution)
     }
     
-    func yearlyResolutionsToDictionary(yearlyResolution: YearlyResolution) -> [String: Any] {
-        let resolutionIDs = yearlyResolution.resolutions.map { $0.id } // This creates an array of resolutionIDs
-        return [
-            "name": yearlyResolution.name,
-            "resolutions": resolutionIDs
-        ]
-    }
-    
-    func groupToDictionary(group: Group) -> [String: Any] {
-        let peopleIDs = group.people.map { $0.id } // This creates an array of peopleIDs
-        let yearlyResolutionDict = yearlyResolutionsToDictionary(yearlyResolution: group.yearlyResolution)
-        return [
-            "id": group.id,
-            "people": peopleIDs,
-            "yearlyResolution": yearlyResolutionDict
-        ]
+    @MainActor
+    func addGroupToFirestore(group: Group) async throws{
+        try await databaseService.addGroupToDB(group: group)
     }
     
     
-    // Firestore stuff
-    let db = Firestore.firestore()
-    
-    func addPersonToFirestore(person: Person) {
-        let personData = personToDictionary(person: person)
-        //print("Attempting to add person to Firestore with data: \(personData)")
-
-        db.collection("people").document(person.id).setData(personData) { error in
-            if let error = error {
-                print("Error adding person to Firestore: \(error)")
-            } else {
-                print("Person successfully added to Firestore!")
-            }
-        }
-    }
-    
-    func addResolutionToFirestore(resolution: Resolution) {
-        let resolutionData = resolutionToDictionary(resolution: resolution)
-        //print("Attempting to add resolution to Firestore with data: \(resolutionData)")
-
-        db.collection("resolutions").document(resolution.id).setData(resolutionData) { error in
-            if let error = error {
-                print("Error adding resolution to Firestore: \(error.localizedDescription)")
-            } else {
-                print("Resolution successfully added to Firestore!")
-            }
-        }
-    }
-    
-    func addGroupToFirestore(group: Group) {
-        let groupData = groupToDictionary(group: group)
-        //print("Attempting to add group to Firestore with data: \(groupData)")
-
-        db.collection("groups").document(group.id).setData(groupData) { error in
-            if let error = error {
-                print("Error adding group to Firestore: \(error.localizedDescription)")
-            } else {
-                print("Group successfully added to Firestore!")
-            }
-        }
-    }
-    
-    func fetchGroupFromFirestore(groupID: String) {
-        let docRef = db.collection("groups").document(groupID)
-        Task {
-            do {
-                let document = try await docRef.getDocument()
-                if document.exists {
-                    let data = document.data() ?? [:]
-                    
-                    if let title = data["title"] as? String {
-                        self.groupTitle = title
-                    }
-                    
-                    if let peopleIDs = data["people"] as? [String] {
-                        // Fetch people using their IDs
-                        await fetchPeopleFromFirestore(peopleIDs: peopleIDs)
-                    }
-                    
-                    if let yearlyResolutionData = data["yearlyResolution"] as? [String: Any],
-                       let yearlyResolutionName = yearlyResolutionData["name"] as? String,
-                       let resolutionIDs = yearlyResolutionData["resolutions"] as? [String] {
-                        
-                        self.yearlyResolutionName = yearlyResolutionName
-                        await fetchResolutionsFromFirestore(resolutionIDs: resolutionIDs)
-                    }
-                    
-                } else {
-                    print("Document does not exist")
-                }
-            } catch {
-                print("Error getting document: \(error)")
-            }
-        }
+    @MainActor
+    func fetchGroupFromFirestore(groupID: String) async throws{
+        let group = try await databaseService.fetchGroupFromDB(groupID: groupID)
+        self.groupTitle = group!.title
+        self.people = group!.people
+        self.yearlyResolutionName = group!.yearlyResolution.name
     }
 
-    
-    func fetchPeopleFromFirestore(peopleIDs: [String]) {
-        self.people = []
-        Task {
-            for personID in peopleIDs {
-                let docRef = db.collection("people").document(personID)
-                do {
-                    let document = try await docRef.getDocument()
-                    if document.exists {
-                        if let data = document.data() {
-                            let id = data["id"] as? String ?? ""
-                            let name = data["name"] as? String ?? "Unknown"
-                            let age = data["age"] as? Int ?? 0
-                            
-                            let person = Person(id: id, name: name, age: age)
-                            self.people.append(person)
-                        }
-                    } else {
-                        print("Document does not exist")
-                    }
-                } catch {
-                    print("Error getting document: \(error)")
-                }
-            }
-        }
+    @MainActor
+    func fetchPeopleFromFirestore(peopleIDs: [String]) async throws {
+        self.people = try await databaseService.fetchPeopleFromDB(peopleIDs: peopleIDs)
     }
     
-    func fetchResolutionsFromFirestore(resolutionIDs: [String]) {
-        self.resolutions = []
-        Task {
-            for resolutionID in resolutionIDs {
-                let docRef = db.collection("resolutions").document(resolutionID)
-                do {
-                    let document = try await docRef.getDocument()
-                    if document.exists {
-                        if let data = document.data() {
-                            let id = data["id"] as? String ?? ""
-                            let name = data["name"] as? String ?? "Unknown Resolution"
-                            let timeBoundRaw = data["timeBound"] as? String ?? "day"
-                            let timeBound = TimeBound(rawValue: timeBoundRaw) ?? .day
-                            let freq = data["freq"] as? Int ?? 0
-                            
-                            let resolution = Resolution(timeBound: timeBound, name: name, successCheckoff: .incomplete, progress: 0.0, goal: 100.0, freq: freq)
-                            self.resolutions.append(resolution)
-                        }
-                    } else {
-                        print("Resolution document does not exist")
-                    }
-                } catch {
-                    print("Error getting resolution document: \(error)")
-                }
-            }
-        }
+    @MainActor
+    func fetchResolutionsFromFirestore(resolutionIDs: [String]) async throws{
+        self.resolutions = try await databaseService.fetchResolutionsFromDB(resolutionIDs: resolutionIDs)
     }
 
 }

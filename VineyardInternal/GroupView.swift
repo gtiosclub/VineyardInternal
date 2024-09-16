@@ -30,11 +30,15 @@ struct GroupView: View {
                     Spacer()
                     VStack{
                         Button("Add Group") {
-                            viewModel.addGroup()
+                            Task {
+                                try await viewModel.addGroup()
+                            }
                         }
                         .padding(1)
                         Button("Fetch Group") {
-                            viewModel.fetchGroupFromFirestore(groupID: "F3827ED2-5E70-47AC-BCB1-FEBDF79AF494")
+                            Task {
+                                try await viewModel.fetchGroupFromFirestore(groupID: "F3827ED2-5E70-47AC-BCB1-FEBDF79AF494")
+                            }
                         }
                         .padding(1)
                         Button("Clear All") {
@@ -107,7 +111,7 @@ struct GroupView: View {
                         TextField("Frequency", text: $viewModel.curr_freq)
                     }
                 }
-                .scrollDisabled(true)
+                .scrollDisabled(false)
             }
         }
         .sheet(isPresented: $showEditPopup) {

@@ -35,4 +35,16 @@ class Resolution: Identifiable {
         self.goal = goal
         self.freq = freq
     }
+    
+    func toDictionary() -> [String: Any] {
+        return [
+            "id": self.id,
+            "name": self.name,
+            "timeBound": self.timeBound.rawValue,
+            "successCheckoff": self.successCheckoff.rawValue,
+            "progress": self.progress,
+            "goal": self.goal,
+            "freq": self.freq
+        ]
+    }
 }

@@ -17,4 +17,12 @@ class Person: Identifiable {
         self.name = name
         self.age = age
     }
+    
+    func toDictionary() -> [String: Any] {
+        return [
+            "id": self.id,
+            "name": self.name,
+            "age": self.age
+        ]
+    }
 }
