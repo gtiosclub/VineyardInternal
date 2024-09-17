@@ -34,11 +34,15 @@ class GroupViewModel: ObservableObject {
         print("People: \(group.people)")
     }
     
-    func addResolution(curr_timeBound: TimeBound?, curr_resolution_name: String, curr_freq: String) {
-        if let timeBound = curr_timeBound, let freq = Int(curr_freq), !curr_resolution_name.isEmpty {
-            let resolution = Resolution(timeBound: timeBound, name: curr_resolution_name, successCheckoff: .incomplete, progress: 0.0, goal: 100.0, freq: freq)
+    func addResolution(curr_timeBound: TimeBound, curr_resolution_name: String, curr_freq: String) {
+        if let freq = Int(curr_freq), !curr_resolution_name.isEmpty {
+            let resolution = Resolution(timeBound: curr_timeBound, 
+                                        name: curr_resolution_name,
+                                        successCheckoff: .incomplete,
+                                        progress: 0.0,
+                                        goal: 100.0,
+                                        freq: freq)
             self.group.yearlyResolution.resolutions.append(resolution)
-            //print("Added resolution: \(resolution)")
         } else {
             print("Failed to add resolution: Missing or invalid information.")
         }

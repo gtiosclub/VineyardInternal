@@ -17,11 +17,7 @@ struct GroupView: View {
     @State var curr_resolution_name: String = ""
     @State var curr_freq: String = ""
     var canAddPerson: Bool {
-        if !curr_name.isEmpty, let age = Int(curr_age), age > 0 {
-            return true
-        } else {
-            return false
-        }
+        return !curr_name.isEmpty && (Int(curr_age) ?? 0) > 0
     }
     var canAddResolution: Bool {
         if !curr_resolution_name.isEmpty, let freq = Int(curr_freq), freq > 0 {
@@ -132,7 +128,7 @@ struct GroupView: View {
                         TextField("Resolution Name", text: $curr_resolution_name)
                         Picker("Time Bound", selection: $curr_timeBound) {
                             ForEach(TimeBound.allCases, id: \.self) { bound in
-                                Text(bound.description()).tag(bound as TimeBound?)
+                                Text(bound.rawValue)
                             }
                         }
                         TextField("Frequency", text: $curr_freq)

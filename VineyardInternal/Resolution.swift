@@ -8,20 +8,9 @@
 import Foundation
 
 enum TimeBound: String, CaseIterable {
-    case day
-    case week
-    case month
-    
-    func description() -> String {
-        switch self {
-        case .day:
-            return "Daily"
-        case .week:
-            return "Weekly"
-        case .month:
-            return "Monthly"
-        }
-    }
+    case day = "Daily"
+    case week = "Weekly"
+    case month = "Monthly"
 }
 
 enum SuccessCheckoff: String{
