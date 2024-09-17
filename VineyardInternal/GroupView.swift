@@ -52,7 +52,7 @@ struct GroupView: View {
                         .padding(1)
                         Button("Fetch Group") {
                             Task {
-                                await viewModel.fetchGroupFromFirestore(groupID: "F3827ED2-5E70-47AC-BCB1-FEBDF79AF494")
+                                await viewModel.fetchGroupFromFirestore(groupID: "C56F8D7F-5A5D-4817-9027-4C8EFD1198CC")
                             }
                         }
                         .padding(1)
