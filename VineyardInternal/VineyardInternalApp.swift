@@ -25,7 +25,7 @@ struct VineyardInternalApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            GroupView()
         }
     }
 }
