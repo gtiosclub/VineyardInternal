@@ -7,44 +7,39 @@
 
 import Foundation
 
-enum TimeBound: String, CaseIterable {
-    case day = "Daily"
-    case week = "Weekly"
-    case month = "Monthly"
+enum Frequency {
+    case daily(count: Int)
+    case weekly(count: Int)
+    case monthly(count: Int)
 }
 
-enum SuccessCheckoff: String{
-    case incomplete
-    case complete
+enum DifficultyLevel {
+    case easy(score: Int)
+    case medium(score: Int)
+    case hard(score: Int)
 }
 
 class Resolution: Identifiable {
-    var id = UUID().uuidString
-    var timeBound: TimeBound
-    var name: String
-    var successCheckoff: SuccessCheckoff
-    var progress: Float
-    var goal: Float
-    var freq: Int // Discuss the ways to make this work
-
-    init(timeBound: TimeBound, name: String, successCheckoff: SuccessCheckoff, progress: Float, goal: Float, freq: Int) {
-        self.timeBound = timeBound
-        self.name = name
-        self.successCheckoff = successCheckoff
-        self.progress = progress
-        self.goal = goal
-        self.freq = freq
+    let id: UUID
+    var title: String
+    var description: String
+    var defaultQuantity: Int? = nil
+    var defaultFrequency: Frequency
+    var diffLevel: DifficultyLevel
+    
+    init(title: String, description: String, quantity: Int? = nil, frequency: Frequency, diffLevel: DifficultyLevel) {
+        self.id = UUID()
+        self.title = title
+        self.description = description
+        self.defaultQuantity = quantity
+        self.defaultFrequency = frequency
+        self.diffLevel = diffLevel
     }
     
-    func toDictionary() -> [String: Any] {
-        return [
-            "id": self.id,
-            "name": self.name,
-            "timeBound": self.timeBound.rawValue,
-            "successCheckoff": self.successCheckoff.rawValue,
-            "progress": self.progress,
-            "goal": self.goal,
-            "freq": self.freq
-        ]
+    static var samples: [Resolution] {
+        let resolution1 = Resolution(title: "Run miles", description: "Run a certain number of miles", quantity: 5, frequency: Frequency.weekly(count: 1), diffLevel: DifficultyLevel.medium(score: 5))
+        let resolution2 = Resolution(title: "Drink 7 cups of water", description: "Drink more water", frequency: Frequency.daily(count: 1), diffLevel: DifficultyLevel.easy(score: 2))
+        
+        return [resolution1, resolution2]
     }
 }

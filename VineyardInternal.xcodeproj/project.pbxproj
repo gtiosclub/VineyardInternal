@@ -11,6 +11,11 @@
 		8730B9332C92A9430040322B /* GroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8730B9322C92A9430040322B /* GroupViewModel.swift */; };
 		8730B9372C92A9950040322B /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 8730B9362C92A9950040322B /* FirebaseAuth */; };
 		8730B9392C92A9950040322B /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 8730B9382C92A9950040322B /* FirebaseFirestore */; };
+		95BA934A2CA891B500137A91 /* ToDoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BA93492CA891B500137A91 /* ToDoListView.swift */; };
+		95BA934C2CA893C400137A91 /* ToDoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BA934B2CA893C400137A91 /* ToDoViewModel.swift */; };
+		95BA934E2CA8971700137A91 /* ToDoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BA934D2CA8971700137A91 /* ToDoView.swift */; };
+		95BA93502CA9CA6500137A91 /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BA934F2CA9CA6500137A91 /* Badge.swift */; };
+		95BA93522CA9CB2100137A91 /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BA93512CA9CB2100137A91 /* Progress.swift */; };
 		B7C253BE2C9247EA00A8F890 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B7C253BD2C9247EA00A8F890 /* GoogleService-Info.plist */; };
 		BB3465D72C92400C00EE9D9D /* VineyardInternalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3465D62C92400C00EE9D9D /* VineyardInternalApp.swift */; };
 		BB3465D92C92400C00EE9D9D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3465D82C92400C00EE9D9D /* ContentView.swift */; };
@@ -23,7 +28,6 @@
 		BB40EDE52C97EB6D006BA1E3 /* FirebaseDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EDE42C97EB6D006BA1E3 /* FirebaseDataManager.swift */; };
 		BB40EDE72C97EC4B006BA1E3 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EDE62C97EC4B006BA1E3 /* Group.swift */; };
 		BB40EDE92C97EC69006BA1E3 /* Resolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EDE82C97EC69006BA1E3 /* Resolution.swift */; };
-		BB40EDEB2C97EC7C006BA1E3 /* YearlyResolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EDEA2C97EC7C006BA1E3 /* YearlyResolution.swift */; };
 		BB40EDED2C97ECA2006BA1E3 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB40EDEC2C97ECA2006BA1E3 /* Person.swift */; };
 		BB9578D02C97D7BF001C8B48 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = BB9578CF2C97D7BF001C8B48 /* FirebaseAnalytics */; };
 		BB9578D22C97D7BF001C8B48 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = BB9578D12C97D7BF001C8B48 /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -52,6 +56,11 @@
 /* Begin PBXFileReference section */
 		8730B9302C92A9270040322B /* GroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupView.swift; sourceTree = "<group>"; };
 		8730B9322C92A9430040322B /* GroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewModel.swift; sourceTree = "<group>"; };
+		95BA93492CA891B500137A91 /* ToDoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListView.swift; sourceTree = "<group>"; };
+		95BA934B2CA893C400137A91 /* ToDoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoViewModel.swift; sourceTree = "<group>"; };
+		95BA934D2CA8971700137A91 /* ToDoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoView.swift; sourceTree = "<group>"; };
+		95BA934F2CA9CA6500137A91 /* Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
+		95BA93512CA9CB2100137A91 /* Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Progress.swift; sourceTree = "<group>"; };
 		B7C253BD2C9247EA00A8F890 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BB3465D32C92400C00EE9D9D /* VineyardInternal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VineyardInternal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB3465D62C92400C00EE9D9D /* VineyardInternalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VineyardInternalApp.swift; sourceTree = "<group>"; };
@@ -67,7 +76,6 @@
 		BB40EDE42C97EB6D006BA1E3 /* FirebaseDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDataManager.swift; sourceTree = "<group>"; };
 		BB40EDE62C97EC4B006BA1E3 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		BB40EDE82C97EC69006BA1E3 /* Resolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resolution.swift; sourceTree = "<group>"; };
-		BB40EDEA2C97EC7C006BA1E3 /* YearlyResolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearlyResolution.swift; sourceTree = "<group>"; };
 		BB40EDEC2C97ECA2006BA1E3 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -169,6 +177,8 @@
 			children = (
 				8730B9302C92A9270040322B /* GroupView.swift */,
 				BB3465D82C92400C00EE9D9D /* ContentView.swift */,
+				95BA93492CA891B500137A91 /* ToDoListView.swift */,
+				95BA934D2CA8971700137A91 /* ToDoView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -177,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				8730B9322C92A9430040322B /* GroupViewModel.swift */,
+				95BA934B2CA893C400137A91 /* ToDoViewModel.swift */,
 			);
 			name = ViewModels;
 			sourceTree = "<group>";
@@ -185,9 +196,10 @@
 			isa = PBXGroup;
 			children = (
 				BB40EDE82C97EC69006BA1E3 /* Resolution.swift */,
-				BB40EDEA2C97EC7C006BA1E3 /* YearlyResolution.swift */,
 				BB40EDE62C97EC4B006BA1E3 /* Group.swift */,
+				95BA934F2CA9CA6500137A91 /* Badge.swift */,
 				BB40EDEC2C97ECA2006BA1E3 /* Person.swift */,
+				95BA93512CA9CB2100137A91 /* Progress.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -351,16 +363,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95BA934E2CA8971700137A91 /* ToDoView.swift in Sources */,
 				BB40EDE92C97EC69006BA1E3 /* Resolution.swift in Sources */,
 				8730B9332C92A9430040322B /* GroupViewModel.swift in Sources */,
-				BB40EDEB2C97EC7C006BA1E3 /* YearlyResolution.swift in Sources */,
 				BB40EDED2C97ECA2006BA1E3 /* Person.swift in Sources */,
+				95BA934C2CA893C400137A91 /* ToDoViewModel.swift in Sources */,
+				95BA93522CA9CB2100137A91 /* Progress.swift in Sources */,
 				BB3465D92C92400C00EE9D9D /* ContentView.swift in Sources */,
+				95BA93502CA9CA6500137A91 /* Badge.swift in Sources */,
 				BB40EDE72C97EC4B006BA1E3 /* Group.swift in Sources */,
 				BB3465D72C92400C00EE9D9D /* VineyardInternalApp.swift in Sources */,
 				BB40EDE32C97DF63006BA1E3 /* DatabaseServiceProtocol.swift in Sources */,
 				BB40EDE52C97EB6D006BA1E3 /* FirebaseDataManager.swift in Sources */,
 				8730B9312C92A9270040322B /* GroupView.swift in Sources */,
+				95BA934A2CA891B500137A91 /* ToDoListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
