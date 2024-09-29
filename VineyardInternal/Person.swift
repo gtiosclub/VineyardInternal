@@ -25,13 +25,18 @@ struct Person: Identifiable {
         
         let progress1 = Progress.samples[0]
         let progress2 = Progress.samples[1]
+        let progress3 = Progress.samples[2]
+        let progress4 = Progress.samples[3]
+        let progress5 = Progress.samples[4]
+        let progress6 = Progress.samples[5]
+
         
         let badge1 = Badge.samples[0]
         let badge2 = Badge.samples[1]
         
-        let andrew = Person(name: "Andrew", groups: [group1], allProgress: [progress1], email: "a@gmail.com")
-        let yash = Person(name: "Yash", groups: [group1], allProgress: [progress2], email: "y@outlook.com", badges:[badge1])
-        let sankaet = Person(name: "Sankaet", groups: [group1], allProgress: [], email: "s@yahoo.com", badges:[badge2])
+        let andrew = Person(name: "Andrew", groups: [group1], allProgress: [progress1, progress4], email: "a@gmail.com")
+        let yash = Person(name: "Yash", groups: [group1], allProgress: [progress2, progress5], email: "y@outlook.com", badges:[badge1])
+        let sankaet = Person(name: "Sankaet", groups: [group1], allProgress: [progress3, progress6], email: "s@yahoo.com", badges:[badge2])
         let rahul = Person(name: "Rahul", groups: [group2], allProgress: [], email: "r@apple.com")
         let vishnesh = Person(name: "Vishnesh", groups: [group2], allProgress: [], email: "v@aol.com")
         let jay = Person(name: "Jason", email: "j@ibm.com")

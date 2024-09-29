@@ -28,9 +28,17 @@ struct Progress: Identifiable {
         let resolution1 = Resolution.samples[0]
         let progress1 = Progress(resolution: resolution1, quantityGoal: 1, frequencyGoal: Frequency.weekly(count: 3), person: Person.samples[0])
         
-        let resolution2 = Resolution.samples[1]
-        let progress2 = Progress(resolution: resolution2, quantityGoal: 1, frequencyGoal: Frequency.weekly(count: 3), person: Person.samples[1])
+        let progress2 = Progress(resolution: resolution1, quantityGoal: 1, frequencyGoal: Frequency.weekly(count: 3), person: Person.samples[1])
         
-        return [progress1, progress2]
+        let progress3 = Progress(resolution: resolution1, quantityGoal: 1, frequencyGoal: Frequency.weekly(count: 3), person: Person.samples[2])
+        
+        let resolution2 = Resolution.samples[1]
+        let progress4 = Progress(resolution: resolution2, quantityGoal: 1, frequencyGoal: Frequency.weekly(count: 3), person: Person.samples[0])
+        
+        let progress5 = Progress(resolution: resolution2, quantityGoal: 1, frequencyGoal: Frequency.weekly(count: 3), person: Person.samples[1])
+        
+        let progress6 = Progress(resolution: resolution2, quantityGoal: 1, frequencyGoal: Frequency.weekly(count: 3), person: Person.samples[2])
+        
+        return [progress1, progress2, progress3, progress4, progress5, progress6]
     }
 }
