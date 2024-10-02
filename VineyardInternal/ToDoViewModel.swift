@@ -8,9 +8,7 @@
 import Foundation
 
 class ToDoViewModel: ObservableObject {
-    @Published var groups: [Group] = Group.samples
+    @Published var person = Person.samples[0]
     
-    func groupResolutions(for group: Group) -> [Resolution] {
-        return group.resolutions
-    }
+    
 }
